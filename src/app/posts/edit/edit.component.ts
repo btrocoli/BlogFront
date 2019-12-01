@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from './../../posts.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -15,7 +15,8 @@ export class EditComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -29,6 +30,19 @@ export class EditComponent implements OnInit {
             categoria: new FormControl(response.categoria),
             mensaje: new FormControl(response.mensaje)
           });
+        }).catch(err => {
+          console.log(err);
+        });
+    });
+  }
+
+  onSubmit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.postsService.update(params.postId, this.formulario.value)
+        .then(response => {
+          console.log(response);
+          alert('Post editado correctamente');
+          this.router.navigate(['/posts']);
         }).catch(err => {
           console.log(err);
         });

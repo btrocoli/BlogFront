@@ -18,6 +18,10 @@ export class PostsService {
     return this.http.get<Post>(`http://localhost:3000/posts/${postId}`).toPromise();
   }
 
+  update(postId, values): Promise<Post> {
+    return this.http.put<Post>(`http://localhost:3000/posts/${postId}`, values).toPromise();
+  }
+
   create(values) {
     return this.http.post('http://localhost:3000/posts/create', values).toPromise();
   }
