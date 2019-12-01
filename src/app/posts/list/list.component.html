@@ -1,0 +1,22 @@
+<div class="post-container">
+    <div class="add-post">
+        <a href="javascript:;" [routerLink]="['/posts/new']">Nuevo post <img src="../assets/img/plus-solid.svg"
+                alt="nuevo"></a>
+    </div>
+    <div class="post" *ngFor="let post of arrPosts">
+        <h4>{{ post.titulo }}</h4>
+        <small>{{ post.usuario }}</small>
+        <p>{{ post.mensaje }}</p>
+        <div class="buttons">
+            <a href="javascript:;" title="Ver detalles" (click)="clickDetalle(post)">
+                <img src="../assets/img/info-solid.svg" alt="detalles">
+            </a>
+            <a href="javascript:;" title="Editar" [routerLink]="['/posts', 'edit', post._id]">
+                <img src="../assets/img/edit-solid.svg" alt="editar">
+            </a>
+            <a href="javascript:;" title="Eliminar" (click)="clickEliminar(post)">
+                <img src="../assets/img/delete-solid.svg" alt="eliminar">
+            </a>
+        </div>
+    </div>
+</div>
