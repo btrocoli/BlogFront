@@ -38,7 +38,7 @@ export class EditComponent implements OnInit {
 
   onSubmit() {
     this.activatedRoute.params.subscribe(params => {
-      this.postsService.update(params.postId, this.formulario.value)
+      this.postsService.update(params.postId, Object.assign({idArticulo: params.postId }, this.formulario.value))
         .then(response => {
           console.log(response);
           alert('Post editado correctamente');
